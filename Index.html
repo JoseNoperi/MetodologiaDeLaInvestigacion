@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario: Metodologías de Desarrollo</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #666;
+            font-size: 0.95em;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .question-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .construct-title {
+            font-size: 0.85em;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .statement {
+            font-size: 1.1em;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .likert-scale {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .likert-option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .likert-option:hover {
+            background-color: #f0f4f8;
+        }
+
+        .likert-option input[type="radio"] {
+            margin-right: 15px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: space-between;
+            background: var(--primary-color);
+            color: white;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            font-size: 0.85em;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Metodología Tradicional vs Ágil</h1>
+            <div class="description">
+                <p>Este instrumento tiene como objetivo evaluar la percepción sobre el impacto de las metodologías ágiles en comparación con las tradicionales en el desarrollo de software.</p>
+                <p>Por favor, indica tu nivel de acuerdo con las siguientes afirmaciones.</p>
+            </div>
+            
+            <div class="legend">
+                <span>1 = Totalmente en desacuerdo</span>
+                <span>2 = En desacuerdo</span>
+                <span>3 = Ni de acuerdo ni en desacuerdo</span>
+                <span>4 = De acuerdo</span>
+                <span>5 = Totalmente de acuerdo</span>
+            </div>
+        </header>
+
+        <form id="surveyForm">
+            <div id="questionsContainer"></div>
+            <button type="submit" class="submit-btn">Guardar Respuestas</button>
+        </form>
+    </div>
+
+    <script>
+        // Aquí transformamos tus constructos en afirmaciones tipo Likert
+        const questionsData = [
+            {
+                construct: "Constructo 1: Planificación y gestión",
+                id: "q1",
+                statement: "Las metodologías ágiles permiten gestionar los cambios de alcance de manera más eficiente que las metodologías tradicionales."
+            },
+            {
+                construct: "Constructo 1: Planificación y gestión",
+                id: "q2",
+                statement: "La comunicación frecuente (semanal o bisemanal) con el cliente reduce significativamente la incertidumbre en el proyecto."
+            },
+            {
+                construct: "Constructo 2: Calidad del producto",
+                id: "q3",
+                statement: "Integrar pruebas automatizadas durante los sprints (ej. TDD) mejora la calidad final del software entregado."
+            },
+            {
+                construct: "Constructo 2: Calidad del producto",
+                id: "q4",
+                statement: "Las retrospectivas al final de cada iteración son fundamentales para la mejora continua del equipo de desarrollo."
+            },
+            {
+                construct: "Constructo 3: Gestión del equipo",
+                id: "q5",
+                statement: "Las metodologías ágiles fomentan una estructura de equipo más horizontal, mejorando el compromiso de los desarrolladores."
+            },
+            {
+                construct: "Constructo 3: Gestión del equipo",
+                id: "q6",
+                statement: "El desarrollo bajo un enfoque ágil requiere profesionales con altas habilidades de comunicación, no solo técnicas."
+            },
+            {
+                construct: "Constructo 4: Relación con el cliente",
+                id: "q7",
+                statement: "Involucrar activamente al cliente (ej. como Product Owner) incrementa notablemente su nivel de satisfacción con el producto."
+            },
+            {
+                construct: "Constructo 5: Adaptabilidad e innovación",
+                id: "q8",
+                statement: "Los ciclos de desarrollo cortos (sprints) reducen el riesgo al experimentar y favorecen la innovación en el proyecto."
+            }
+        ];
+
+        const scaleOptions = [
+            { value: 1, label: "1. Totalmente en desacuerdo" },
+            { value: 2, label: "2. En desacuerdo" },
+            { value: 3, label: "3. Ni de acuerdo ni en desacuerdo" },
+            { value: 4, label: "4. De acuerdo" },
+            { value: 5, label: "5. Totalmente de acuerdo" }
+        ];
+
+        // Renderizar las preguntas dinámicamente
+        const container = document.getElementById('questionsContainer');
+
+        questionsData.forEach((q, index) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            
+            let optionsHtml = '';
+            scaleOptions.forEach(opt => {
+                optionsHtml += `
+                    <label class="likert-option">
+                        <input type="radio" name="${q.id}" value="${opt.value}" required>
+                        ${opt.label}
+                    </label>
+                `;
+            });
+
+            card.innerHTML = `
+                <span class="construct-title">${q.construct}</span>
+                <div class="statement">${index + 1}. ${q.statement}</div>
+                <div class="likert-scale">
+                    ${optionsHtml}
+                </div>
+            `;
+            
+            container.appendChild(card);
+        });
+
+        // Manejar el envío del formulario y guardar en LocalStorage
+        document.getElementById('surveyForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita que la página se recargue
+
+            const formData = new FormData(this);
+            const responses = {};
+
+            for (let [name, value] of formData.entries()) {
+                responses[name] = parseInt(value);
+            }
+
+            // Crear un objeto con la fecha y las respuestas
+            const submission = {
+                timestamp: new Date().toISOString(),
+                data: responses
+            };
+
+            // Recuperar envíos anteriores o crear un arreglo nuevo
+            let savedData = JSON.parse(localStorage.getItem('surveyResults')) || [];
+            savedData.push(submission);
+
+            // Guardar de vuelta en LocalStorage
+            localStorage.setItem('surveyResults', JSON.stringify(savedData));
+
+            alert('¡Respuestas guardadas correctamente en la memoria del navegador!');
+            this.reset(); // Limpiar el formulario
+            
+            // Opcional: Mostrar los datos en la consola para que los veas
+            console.log("Datos almacenados hasta ahora:", savedData);
+        });
+    </script>
+</body>
+</html>
