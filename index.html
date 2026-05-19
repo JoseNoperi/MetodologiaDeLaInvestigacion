@@ -3,268 +3,802 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuestionario: Metodologías de Desarrollo</title>
+    <title>Cuestionario: Metodología Ágil vs Tradicional en Desarrollo de Software</title>
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --bg-color: #f4f7f6;
-            --card-bg: #ffffff;
-            --text-color: #333333;
-            --border-radius: 8px;
-        }
-
-        body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             padding: 20px;
         }
-
+        
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
         }
-
-        header {
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
             text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.95;
+            line-height: 1.5;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            font-weight: 600;
+            color: #667eea;
+            margin-top: 20px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .info-box {
+            background: #f5f7fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .section {
             margin-bottom: 40px;
         }
-
-        h1 {
-            color: var(--primary-color);
-            margin-bottom: 10px;
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
         }
-
-        .description {
-            color: #666;
-            font-size: 0.95em;
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        
+        .question-group {
             margin-bottom: 30px;
+            padding: 20px;
+            background: #fafbfc;
+            border-radius: 8px;
+            border-left: 3px solid #764ba2;
         }
-
-        .question-card {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
-            border-left: 5px solid var(--secondary-color);
+        
+        .question-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.4;
         }
-
-        .construct-title {
-            font-size: 0.85em;
-            text-transform: uppercase;
-            color: var(--secondary-color);
-            font-weight: bold;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .statement {
-            font-size: 1.1em;
-            font-weight: 500;
-            margin-bottom: 20px;
-        }
-
+        
         .likert-scale {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            align-items: center;
+            margin-top: 10px;
         }
-
+        
+        .likert-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
         .likert-option {
             display: flex;
             align-items: center;
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 4px;
-            transition: background-color 0.2s;
+            justify-content: center;
         }
-
-        .likert-option:hover {
-            background-color: #f0f4f8;
-        }
-
+        
         .likert-option input[type="radio"] {
-            margin-right: 15px;
-            transform: scale(1.2);
+            width: 20px;
+            height: 20px;
             cursor: pointer;
+            accent-color: #667eea;
         }
-
-        .submit-btn {
-            background-color: var(--secondary-color);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.1em;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            width: 100%;
-            transition: background-color 0.3s;
-            font-weight: bold;
-            margin-top: 20px;
+        
+        .likert-option:hover {
+            transform: scale(1.1);
         }
-
-        .submit-btn:hover {
-            background-color: #2980b9;
+        
+        .scale-labels {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            font-size: 11px;
+            color: #999;
+            margin-top: 8px;
+            text-align: center;
         }
-
-        .legend {
+        
+        .buttons {
             display: flex;
-            justify-content: space-between;
-            background: var(--primary-color);
-            color: white;
-            padding: 15px;
-            border-radius: var(--border-radius);
-            margin-bottom: 30px;
-            font-size: 0.85em;
+            gap: 15px;
+            margin-top: 40px;
+            justify-content: center;
             flex-wrap: wrap;
-            gap: 10px;
+        }
+        
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-submit {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-width: 150px;
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-reset {
+            background: #e0e0e0;
+            color: #333;
+            min-width: 120px;
+        }
+        
+        .btn-reset:hover {
+            background: #d0d0d0;
+        }
+        
+        .footer {
+            background: #f5f7fa;
+            padding: 20px;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .constructo-label {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .error-message {
+            display: none;
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .success-message {
+            display: none;
+            background: #d4edda;
+            border: 1px solid #28a745;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .likert-scale {
+                grid-template-columns: repeat(7, 1fr);
+                gap: 4px;
+            }
+            
+            .likert-option input[type="radio"] {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .scale-labels {
+                font-size: 9px;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <header>
-            <h1>Metodología Tradicional vs Ágil</h1>
-            <div class="description">
-                <p>Este instrumento tiene como objetivo evaluar la percepción sobre el impacto de las metodologías ágiles en comparación con las tradicionales en el desarrollo de software.</p>
-                <p>Por favor, indica tu nivel de acuerdo con las siguientes afirmaciones.</p>
+        <div class="header">
+            <h1>Cuestionario de Investigación</h1>
+            <p>Metodología Ágil vs Tradicional en Desarrollo de Software</p>
+        </div>
+        
+        <div class="content">
+            <div class="error-message" id="errorMsg"></div>
+            <div class="success-message" id="successMsg"></div>
+            
+            <div class="info-box">
+                <strong>Instrucciones:</strong> Por favor, evalúe su grado de acuerdo con las siguientes afirmaciones 
+                usando una escala de 7 puntos, donde 1 = "Muy poco" y 7 = "Mucho". Sus respuestas son completamente 
+                anónimas y confidenciales, utilizadas únicamente para fines de investigación académica.
             </div>
             
-            <div class="legend">
-                <span>1 = Totalmente en desacuerdo</span>
-                <span>2 = En desacuerdo</span>
-                <span>3 = Ni de acuerdo ni en desacuerdo</span>
-                <span>4 = De acuerdo</span>
-                <span>5 = Totalmente de acuerdo</span>
-            </div>
-        </header>
-
-        <form id="surveyForm">
-            <div id="questionsContainer"></div>
-            <button type="submit" class="submit-btn">Guardar Respuestas</button>
-        </form>
-    </div>
-
-    <script>
-        // Aquí transformamos tus constructos en afirmaciones tipo Likert
-        const questionsData = [
-            {
-                construct: "Constructo 1: Planificación y gestión",
-                id: "q1",
-                statement: "Las metodologías ágiles permiten gestionar los cambios de alcance de manera más eficiente que las metodologías tradicionales."
-            },
-            {
-                construct: "Constructo 1: Planificación y gestión",
-                id: "q2",
-                statement: "La comunicación frecuente (semanal o bisemanal) con el cliente reduce significativamente la incertidumbre en el proyecto."
-            },
-            {
-                construct: "Constructo 2: Calidad del producto",
-                id: "q3",
-                statement: "Integrar pruebas automatizadas durante los sprints (ej. TDD) mejora la calidad final del software entregado."
-            },
-            {
-                construct: "Constructo 2: Calidad del producto",
-                id: "q4",
-                statement: "Las retrospectivas al final de cada iteración son fundamentales para la mejora continua del equipo de desarrollo."
-            },
-            {
-                construct: "Constructo 3: Gestión del equipo",
-                id: "q5",
-                statement: "Las metodologías ágiles fomentan una estructura de equipo más horizontal, mejorando el compromiso de los desarrolladores."
-            },
-            {
-                construct: "Constructo 3: Gestión del equipo",
-                id: "q6",
-                statement: "El desarrollo bajo un enfoque ágil requiere profesionales con altas habilidades de comunicación, no solo técnicas."
-            },
-            {
-                construct: "Constructo 4: Relación con el cliente",
-                id: "q7",
-                statement: "Involucrar activamente al cliente (ej. como Product Owner) incrementa notablemente su nivel de satisfacción con el producto."
-            },
-            {
-                construct: "Constructo 5: Adaptabilidad e innovación",
-                id: "q8",
-                statement: "Los ciclos de desarrollo cortos (sprints) reducen el riesgo al experimentar y favorecen la innovación en el proyecto."
-            }
-        ];
-
-        const scaleOptions = [
-            { value: 1, label: "1. Totalmente en desacuerdo" },
-            { value: 2, label: "2. En desacuerdo" },
-            { value: 3, label: "3. Ni de acuerdo ni en desacuerdo" },
-            { value: 4, label: "4. De acuerdo" },
-            { value: 5, label: "5. Totalmente de acuerdo" }
-        ];
-
-        // Renderizar las preguntas dinámicamente
-        const container = document.getElementById('questionsContainer');
-
-        questionsData.forEach((q, index) => {
-            const card = document.createElement('div');
-            card.className = 'question-card';
-            
-            let optionsHtml = '';
-            scaleOptions.forEach(opt => {
-                optionsHtml += `
-                    <label class="likert-option">
-                        <input type="radio" name="${q.id}" value="${opt.value}" required>
-                        ${opt.label}
-                    </label>
-                `;
-            });
-
-            card.innerHTML = `
-                <span class="construct-title">${q.construct}</span>
-                <div class="statement">${index + 1}. ${q.statement}</div>
-                <div class="likert-scale">
-                    ${optionsHtml}
+            <form id="formulario" onsubmit="enviarFormulario(event)">
+                
+                <!-- CONSTRUCTO 1 -->
+                <div class="section">
+                    <h2 class="section-title">Constructo 1: Planificación y Gestión del Proyecto</h2>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P1</span>
+                        <div class="question-text">¿Qué tan satisfecho está con la estructura de planificación inicial de sus proyectos?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c1_p1" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c1_p1" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p1" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p1" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p1" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p1" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p1" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P2</span>
+                        <div class="question-text">¿Qué tan frecuentemente enfrenta cambios en los requisitos del proyecto después de iniciado?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c1_p2" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c1_p2" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p2" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p2" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p2" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p2" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p2" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P3</span>
+                        <div class="question-text">¿Qué tan flexible es su proceso de planificación actual ante cambios imprevistos?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c1_p3" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c1_p3" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p3" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p3" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p3" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p3" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p3" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P4</span>
+                        <div class="question-text">¿Qué tan bien comunica su equipo los cambios de alcance con el cliente?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c1_p4" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c1_p4" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p4" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p4" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p4" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p4" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p4" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P5</span>
+                        <div class="question-text">¿Qué tan frecuente es la comunicación formal con el cliente durante el desarrollo?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c1_p5" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c1_p5" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p5" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p5" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p5" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p5" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c1_p5" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
                 </div>
-            `;
+                
+                <!-- CONSTRUCTO 2 -->
+                <div class="section">
+                    <h2 class="section-title">Constructo 2: Calidad del Producto</h2>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P1</span>
+                        <div class="question-text">¿Qué tan rigurosos son los procesos de aseguramiento de calidad en su empresa?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c2_p1" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c2_p1" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p1" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p1" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p1" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p1" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p1" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P2</span>
+                        <div class="question-text">¿En qué medida la metodología que utiliza impacta en la calidad final del software?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c2_p2" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c2_p2" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p2" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p2" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p2" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p2" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p2" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P3</span>
+                        <div class="question-text">¿Qué tan frecuentes son los defectos encontrados después de la entrega al cliente?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c2_p3" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c2_p3" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p3" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p3" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p3" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p3" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p3" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P4</span>
+                        <div class="question-text">¿Qué tan importante es realizar retrospectivas o revisiones después de cada proyecto/iteración?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c2_p4" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c2_p4" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p4" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p4" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p4" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p4" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p4" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P5</span>
+                        <div class="question-text">¿Qué tan automatizadas están las pruebas de calidad en su proceso de desarrollo?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c2_p5" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c2_p5" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p5" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p5" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p5" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p5" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c2_p5" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CONSTRUCTO 3 -->
+                <div class="section">
+                    <h2 class="section-title">Constructo 3: Gestión del Equipo de Trabajo</h2>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P1</span>
+                        <div class="question-text">¿Qué tan clara está la estructura organizacional de sus equipos de desarrollo?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c3_p1" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c3_p1" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p1" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p1" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p1" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p1" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p1" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P2</span>
+                        <div class="question-text">¿Qué tan horizontal y colaborativa es la dinámica de su equipo?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c3_p2" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c3_p2" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p2" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p2" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p2" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p2" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p2" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P3</span>
+                        <div class="question-text">¿Qué tanta resistencia ha enfrentado al adoptar nuevas metodologías de trabajo?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c3_p3" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c3_p3" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p3" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p3" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p3" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p3" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p3" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P4</span>
+                        <div class="question-text">¿Qué tan importante es la capacitación continua en su organización?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c3_p4" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c3_p4" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p4" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p4" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p4" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p4" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p4" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P5</span>
+                        <div class="question-text">¿Qué tan importante es que el equipo tenga buenas habilidades de comunicación?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c3_p5" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c3_p5" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p5" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p5" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p5" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p5" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c3_p5" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CONSTRUCTO 4 -->
+                <div class="section">
+                    <h2 class="section-title">Constructo 4: Relación con el Cliente</h2>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P1</span>
+                        <div class="question-text">¿Qué tan activamente participa el cliente en el proceso de desarrollo?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c4_p1" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c4_p1" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p1" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p1" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p1" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p1" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p1" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P2</span>
+                        <div class="question-text">¿Qué tan satisfecho está el cliente con los resultados que obtiene?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c4_p2" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c4_p2" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p2" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p2" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p2" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p2" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p2" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P3</span>
+                        <div class="question-text">¿Qué tan bien entienden sus clientes la metodología que utiliza?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c4_p3" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c4_p3" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p3" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p3" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p3" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p3" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p3" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P4</span>
+                        <div class="question-text">¿Ha perdido clientes al cambiar de metodología de trabajo?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c4_p4" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c4_p4" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p4" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p4" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p4" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p4" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p4" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P5</span>
+                        <div class="question-text">¿Qué tan importante es la confianza del cliente para el éxito de sus proyectos?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c4_p5" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c4_p5" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p5" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p5" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p5" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p5" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c4_p5" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CONSTRUCTO 5 -->
+                <div class="section">
+                    <h2 class="section-title">Constructo 5: Adaptabilidad e Innovación</h2>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P1</span>
+                        <div class="question-text">¿Qué tan rápido puede su empresa adaptarse a cambios del mercado?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c5_p1" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c5_p1" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p1" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p1" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p1" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p1" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p1" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P2</span>
+                        <div class="question-text">¿Qué tan favorable es su metodología para fomentar la innovación?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c5_p2" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c5_p2" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p2" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p2" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p2" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p2" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p2" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P3</span>
+                        <div class="question-text">¿Combina elementos de metodologías tradicionales y ágiles en su proceso?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c5_p3" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c5_p3" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p3" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p3" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p3" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p3" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p3" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P4</span>
+                        <div class="question-text">¿Qué tan moderna y actualizada es la infraestructura tecnológica que utiliza?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c5_p4" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c5_p4" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p4" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p4" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p4" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p4" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p4" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <span class="constructo-label">P5</span>
+                        <div class="question-text">¿Qué tan importante considera la inteligencia artificial en el futuro del desarrollo de software?</div>
+                        <div class="likert-scale">
+                            <div class="likert-option"><input type="radio" name="c5_p5" value="1" required></div>
+                            <div class="likert-option"><input type="radio" name="c5_p5" value="2"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p5" value="3"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p5" value="4"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p5" value="5"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p5" value="6"></div>
+                            <div class="likert-option"><input type="radio" name="c5_p5" value="7"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muy poco</span><span></span><span></span><span></span><span></span><span></span><span>Mucho</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button type="submit" class="btn-submit">Enviar Respuestas</button>
+                    <button type="reset" class="btn-reset">Limpiar Formulario</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Investigación Académica - Universidad de Sonora</strong></p>
+            <p>Doctorado en Ciencias Económicas y Administrativas</p>
+            <p>Metodología de la Investigación II | Abril 2025</p>
+            <p style="margin-top: 10px; font-size: 12px; color: #999;">
+                Todas las respuestas son anónimas y confidenciales, utilizadas únicamente con fines de investigación.
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        function enviarFormulario(event) {
+            event.preventDefault();
             
-            container.appendChild(card);
-        });
-
-        // Manejar el envío del formulario y guardar en LocalStorage
-        document.getElementById('surveyForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Evita que la página se recargue
-
-            const formData = new FormData(this);
-            const responses = {};
-
-            for (let [name, value] of formData.entries()) {
-                responses[name] = parseInt(value);
+            // Validar que todos los campos estén seleccionados
+            const formulario = document.getElementById('formulario');
+            const inputs = formulario.querySelectorAll('input[type="radio"]');
+            const grupos = {};
+            
+            inputs.forEach(input => {
+                grupos[input.name] = grupos[input.name] || false;
+                if (input.checked) {
+                    grupos[input.name] = true;
+                }
+            });
+            
+            const camposFaltantes = Object.keys(grupos).filter(key => !grupos[key]);
+            
+            if (camposFaltantes.length > 0) {
+                document.getElementById('errorMsg').style.display = 'block';
+                document.getElementById('errorMsg').innerText = 
+                    'Por favor, complete todas las preguntas antes de enviar.';
+                window.scrollTo(0, 0);
+                return;
             }
-
-            // Crear un objeto con la fecha y las respuestas
-            const submission = {
-                timestamp: new Date().toISOString(),
-                data: responses
-            };
-
-            // Recuperar envíos anteriores o crear un arreglo nuevo
-            let savedData = JSON.parse(localStorage.getItem('surveyResults')) || [];
-            savedData.push(submission);
-
-            // Guardar de vuelta en LocalStorage
-            localStorage.setItem('surveyResults', JSON.stringify(savedData));
-
-            alert('¡Respuestas guardadas correctamente en la memoria del navegador!');
-            this.reset(); // Limpiar el formulario
             
-            // Opcional: Mostrar los datos en la consola para que los veas
-            console.log("Datos almacenados hasta ahora:", savedData);
+            // Si todo está bien, mostrar mensaje de éxito
+            document.getElementById('errorMsg').style.display = 'none';
+            document.getElementById('successMsg').style.display = 'block';
+            document.getElementById('successMsg').innerText = 
+                '✓ ¡Gracias por completar el cuestionario! Sus respuestas han sido registradas exitosamente.';
+            
+            // Aquí se podría enviar los datos a un servidor
+            console.log('Formulario completo:', new FormData(formulario));
+            
+            // Deshabilitar el botón de envío
+            document.querySelector('.btn-submit').disabled = true;
+            document.querySelector('.btn-submit').style.opacity = '0.6';
+            
+            window.scrollTo(0, 0);
+        }
+        
+        // Animar la entrada del formulario
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                section.style.animation = `fadeInUp 0.5s ease forwards`;
+                section.style.animationDelay = `${index * 0.1}s`;
+            });
         });
     </script>
+    
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </body>
 </html>
